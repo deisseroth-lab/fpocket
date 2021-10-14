@@ -76,6 +76,8 @@ typedef struct s_desc
             charge_score ;	/**< Sum of all net charges at pH = 7 (see aa.c & aa.h) */
         float as_max_r ;        /**< Alpha sphere maximum radius*/
         float drug_score;       /**< Drug score of the binding site*/
+        float orig_score;       /**< Drug score of the binding site*/
+        float orig_alt_score;       /**< Drug score of the binding site*/
         int interChain,                             /**< 0 if pocket in single chain, 1 if between 2 chains*/
                 characterChain1,                         /**< 0 if protein, 1 if nucl acid pocket, 2 if HETATM pocket*/
                 characterChain2,                         /**< 0 if protein, 1 if nucl acid pocket, 2 if HETATM pocket*/

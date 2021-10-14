@@ -47,7 +47,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         float: The score
   
  */
-float score_pocket(s_desc *pdesc) {
+float orig_alt_score_pocket(s_desc *pdesc) {
     float score;
 
     /**
@@ -98,7 +98,11 @@ float score_pocket(s_desc *pdesc) {
             + 11.72346 * (float) pdesc->mean_loc_hyd_dens_norm
             + 1.16349 * (float) pdesc->polarity_score
             - 2.06835 * (float) pdesc->as_density;
+        return score;
+}
 
+float orig_score_pocket(s_desc *pdesc) {
+    float score;
 
     /*
             Using m 3.0 M 6.0 D 1mean_loc_hyd_dens_norm.73 i 25 n 2 we have for the training set this PLS model
@@ -332,3 +336,44 @@ float drug_score_pocket(s_desc *pdesc) {
     return score;
 
 }
+
+float log_likelihood(float value, float mean, float std) {
+        return - (mean - value) * (mean - value) / (std * std);
+}
+
+float score_pocket(s_desc *pdesc) {
+        // Suggestion from Eamon for likelihood fitting
+        // nb_AS               50.11   5.21
+        // pock_vol            499.96  45.14
+        // mean_loc_hyd_dens   30.40   5.20
+        // as_max_dst          13.97   0.85
+        // convex_hull_volume  110.16  31.43
+
+        const float nb_AS_weight = 1.0;
+        const float nb_AS_mean = 50.11;
+        const float nb_AS_std = 5.21;
+
+        const float pock_vol_weight = 1.0;
+        const float pock_vol_mean = 499.96;
+        const float pock_vol_std = 45.14;
+
+        const float mean_loc_hyd_dens_weight = 1.0;
+        const float mean_loc_hyd_dens_mean = 30.40;
+        const float mean_loc_hyd_dens_std = 5.20;
+
+        const float as_max_dst_weight = 1.0;
+        const float as_max_dst_mean = 13.97;
+        const float as_max_dst_std = 0.85;
+
+        const float convex_hull_volume_weight = 1.0;
+        const float convex_hull_volume_mean = 110.16;
+        const float convex_hull_volume_std = 31.43;
+
+        return 
+             nb_AS_weight * log_likelihood(pdesc->nb_asph, nb_AS_mean, nb_AS_std) +
+             pock_vol_weight * log_likelihood(pdesc->volume, pock_vol_mean, pock_vol_std) +
+             mean_loc_hyd_dens_weight * log_likelihood(pdesc->mean_loc_hyd_dens, mean_loc_hyd_dens_mean, mean_loc_hyd_dens_std) +
+             as_max_dst_weight * log_likelihood(pdesc->as_max_dst, as_max_dst_mean, as_max_dst_std) +
+             convex_hull_volume_weight * log_likelihood(pdesc->convex_hull_volume, convex_hull_volume_mean, convex_hull_volume_std);
+}
+

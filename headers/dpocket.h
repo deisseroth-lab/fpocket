@@ -39,8 +39,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #define M_DP_POCKET   2
 #define M_DP_POCETLIG 3
 
-#define M_DP_OUTP_HEADER "pdb lig overlap PP-crit PP-dst crit4 crit5 crit6 crit6_continue lig_vol pock_vol nb_AS nb_AS_norm mean_as_ray mean_as_solv_acc apol_as_prop apol_as_prop_norm mean_loc_hyd_dens mean_loc_hyd_dens_norm hydrophobicity_score volume_score polarity_score polarity_score_norm charge_score flex prop_polar_atm as_density as_density_norm as_max_dst as_max_dst_norm drug_score convex_hull_volume surf_pol_vdw14 surf_pol_vdw22 surf_apol_vdw14 surf_apol_vdw22 n_abpa"/**< header for the dpocket output*/
-#define M_DP_OUTP_FORMAT "%s %s %6.2f %2d %6.2f %4.2f %4.2f %2d %5.2f %8.2f %10.2f %5d %4.2f %6.2f %6.2f %5.2f %4.2f %7.2f %4.2f %9.2f %7.2f %5d %5.2f %5d %6.2f %7.2f %5.2f %5.2f %5.2f %5.2f %5.2f %5.2f %5.2f %5.2f %5.2f %5.2f %5d" /**< format for the dpocket output*/
+#define M_DP_OUTP_HEADER "pdb lig overlap PP-crit PP-dst crit4 crit5 crit6 crit6_continue lig_vol pock_vol nb_AS nb_AS_norm mean_as_ray mean_as_solv_acc apol_as_prop apol_as_prop_norm mean_loc_hyd_dens mean_loc_hyd_dens_norm hydrophobicity_score volume_score polarity_score polarity_score_norm charge_score flex prop_polar_atm as_density as_density_norm as_max_dst as_max_dst_norm drug_score convex_hull_volume surf_pol_vdw14 surf_pol_vdw22 surf_apol_vdw14 surf_apol_vdw22 n_abpa orig_score orig_alt_score"/**< header for the dpocket output*/
+#define M_DP_OUTP_FORMAT "%s %s %6.2f %2d %6.2f %4.2f %4.2f %2d %5.2f %8.2f %10.2f %5d %4.2f %6.2f %6.2f %5.2f %4.2f %7.2f %4.2f %9.2f %7.2f %5d %5.2f %5d %6.2f %7.2f %5.2f %5.2f %5.2f %5.2f %5.2f %5.2f %5.2f %5.2f %5.2f %5.2f %5d %5.2f %5.2f" /**< format for the dpocket output*/
 #define M_DP_OUTP_VAR(fc, l, ovlp, status, dst, c4, c5, c6, c6_c, lv, d) fc, l, ovlp, status, dst, c4, c5, c6, c6_c, lv, \
                                           d->volume, \
                                           d->nb_asph, d->nas_norm,\
@@ -67,7 +67,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                                           d->surf_pol_vdw22, \
                                           d->surf_apol_vdw14, \
                                           d->surf_apol_vdw22, \
-                                          d->n_abpa 
+                                          d->n_abpa, \
+                                          d->orig_score, \
+                                          d->orig_alt_score
 
 
 /* ------------------------------PROTOTYPES-----------------------------------*/

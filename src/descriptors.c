@@ -120,6 +120,8 @@ void reset_desc(s_desc *desc)
     desc->surf_vdw22=0.0;
 
     desc->drug_score=0.0;
+    desc->orig_score=0.0;
+    desc->orig_alt_score=0.0;
     desc->numResChain1=0;
     desc->numResChain2=0;
     desc->characterChain1=0;

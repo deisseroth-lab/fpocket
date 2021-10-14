@@ -631,7 +631,9 @@ void set_pockets_descriptors(c_lst_pockets *pockets,s_pdb *pdb,s_fparams *params
 		cur = pockets->first ;
 		while(cur) {
 			cur->pocket->score = score_pocket(cur->pocket->pdesc) ;
-                        cur->pocket->pdesc->drug_score = drug_score_pocket(cur->pocket->pdesc);
+            cur->pocket->pdesc->drug_score = drug_score_pocket(cur->pocket->pdesc);
+            cur->pocket->pdesc->orig_score = orig_score_pocket(cur->pocket->pdesc);
+            cur->pocket->pdesc->orig_alt_score = orig_alt_score_pocket(cur->pocket->pdesc);
 			cur = cur->next ;
 		}
 	}

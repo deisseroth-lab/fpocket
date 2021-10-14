@@ -182,6 +182,8 @@ void write_out_fpocket_info_file(c_lst_pockets *pockets, char *output_file_name)
          //            fprintf(f,"\tFlexibility : \t\t\t %.3f\n",pdesc->flex);
          fprintf(f, "\tScore : \t%.3f\n", pcur->pocket->score);
          fprintf(f, "\tDruggability Score : \t%.3f\n", pdesc->drug_score);
+         fprintf(f, "\tOriginal Score : \t%.3f\n", pdesc->orig_score);
+         fprintf(f, "\tOriginal (Alt) Score : \t%.3f\n", pdesc->orig_alt_score);
          fprintf(f, "\tNumber of Alpha Spheres : \t%d\n", pcur->pocket->size);
          fprintf(f, "\tTotal SASA : \t%.3f\n", pdesc->surf_vdw14);
          fprintf(f, "\tPolar SASA : \t%.3f\n", pdesc->surf_pol_vdw14);
@@ -257,7 +259,7 @@ void write_descriptors_DB(c_lst_pockets *pockets, FILE *f)
    node_pocket *npcur;
    npcur = pockets->first;
    int r = 1, i;
-   fprintf(f, "cav_id drug_score volume nb_asph inter_chain apol_asph_proportion mean_asph_radius "
+   fprintf(f, "cav_id drug_score orig_score orig_alt_score volume nb_asph inter_chain apol_asph_proportion mean_asph_radius "
               "as_density mean_asph_solv_acc mean_loc_hyd_dens flex hydrophobicity_score volume_score charge_score "
               "polarity_score a0_apol a0_pol af_apol af_pol n_abpa "
               "ala cys asp glu phe gly his ile lys leu met asn pro gln arg ser thr val trp tyr "
@@ -274,7 +276,7 @@ void write_descriptors_DB(c_lst_pockets *pockets, FILE *f)
       //"ser":int(r[33]),"thr":int(r[34]),"val":int(r[35]),"trp":int(r[36]),"tyr":int(r[37])}
       //entry={"pdb_id":pdbFile,"cav_id":int(r[0]),"chain_1_type":int(r[38]), "chain_2_type":int(r[39]), "num_res_chain_1":int(r[40]),"num_res_chain_2":int(r[41])}
       // entry={"pdb_id":pdbFile,"cav_id":int(r[0]),"lig_het_tag":str(r[42])}
-      fprintf(f, "%d %.4f %.4f %d %d %.4f %.4f", r, p->pdesc->drug_score, p->pdesc->volume,
+      fprintf(f, "%d %.4f %.4f %.4f %.4f %d %d %.4f %.4f", r, p->pdesc->drug_score, p->pdesc->orig_score, p->pdesc->orig_alt_score, p->pdesc->volume,
               p->pdesc->nb_asph, p->pdesc->interChain, (float)p->nAlphaApol / (float)p->pdesc->nb_asph, p->pdesc->mean_asph_ray);
       fprintf(f, " %.4f %.4f %.4f %.4f %.4f %.4f %d", p->pdesc->as_density, p->pdesc->masph_sacc, p->pdesc->mean_loc_hyd_dens, p->pdesc->flex, p->pdesc->hydrophobicity_score,
               p->pdesc->volume_score, p->pdesc->charge_score);

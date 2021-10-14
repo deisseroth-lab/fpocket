@@ -547,6 +547,8 @@ void write_pocket_pqr(const char out[], s_pocket *pocket) {
         fprintf(f, "HEADER 11 - Local hydrophobic density Score   : %.4f\n", pocket->pdesc->mean_loc_hyd_dens);
         fprintf(f, "HEADER 12 - Number of apolar alpha sphere     : %5d\n", pocket->nAlphaApol);
         fprintf(f, "HEADER 13 - Proportion of apolar alpha sphere : %.4f\n", pocket->pdesc->apolar_asphere_prop);
+        fprintf(f, "HEADER 14 - Original Score                    : %.4f\n", pocket->pdesc->orig_score);
+        fprintf(f, "HEADER 15 - Original (Alt) Score              : %.4f\n", pocket->pdesc->orig_alt_score);
 
         vcur = pocket->v_lst->first;
 
@@ -613,6 +615,8 @@ void write_pocket_pdb(const char out[], s_pocket *pocket) {
         fprintf(f, "HEADER 12 - Local hydrophobic density Score   : %.4f\n", pocket->pdesc->mean_loc_hyd_dens);
         fprintf(f, "HEADER 13 - Number of apolar alpha sphere     : %5d\n", pocket->nAlphaApol);
         fprintf(f, "HEADER 14 - Proportion of apolar alpha sphere : %.4f\n", pocket->pdesc->apolar_asphere_prop);
+        fprintf(f, "HEADER 15 - Original Score                    : %.4f\n", pocket->pdesc->orig_score);
+        fprintf(f, "HEADER 16 - Original (Alt) Score              : %.4f\n", pocket->pdesc->orig_alt_score);
 
         /* First get the list of atoms */
         vcur = pocket->v_lst->first;
@@ -691,6 +695,8 @@ void write_pocket_mmcif(const char out[], s_pocket *pocket) {
         fprintf(f, "12 - Local hydrophobic density Score   : %.4f\n", pocket->pdesc->mean_loc_hyd_dens);
         fprintf(f, "13 - Number of apolar alpha sphere     : %5d\n", pocket->nAlphaApol);
         fprintf(f, "14 - Proportion of apolar alpha sphere : %.4f\n", pocket->pdesc->apolar_asphere_prop);
+        fprintf(f, "15 - Original Score                    : %.4f\n", pocket->pdesc->orig_score);
+        fprintf(f, "16 - Original (Alt) Score              : %.4f\n", pocket->pdesc->orig_alt_score);
         fprintf(f,"# \n");
         /* First get the list of atoms */
         vcur = pocket->v_lst->first;
