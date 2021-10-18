@@ -257,13 +257,16 @@ void write_descriptors_DB(c_lst_pockets *pockets, FILE *f)
    node_pocket *npcur;
    npcur = pockets->first;
    int r = 1, i;
-   fprintf(f, "cav_id score drug_score volume nb_asph inter_chain apol_asph_proportion mean_asph_radius "
-              "as_density mean_asph_solv_acc mean_loc_hyd_dens flex hydrophobicity_score volume_score charge_score "
-              "polarity_score a0_apol a0_pol af_apol af_pol n_abpa "
-              "ala cys asp glu phe gly his ile lys leu met asn pro gln arg ser thr val trp tyr "
-              "chain_1_type chain_2_type num_res_chain_1 "
-              "num_res_chain_2 lig_het_tag name_chain_1 name_chain_2 "
-              "convex_hull_volume as_max_dst\n");
+   fprintf(f, "cav_id score drug_score volume nb_asph inter_chain apol_asph_proportion mean_asph_radius"
+              " as_density mean_asph_solv_acc mean_loc_hyd_dens flex hydrophobicity_score volume_score charge_score"
+              " polarity_score a0_apol a0_pol af_apol af_pol n_abpa"
+              " ala cys asp glu phe gly his ile lys leu met asn pro gln arg ser thr val trp tyr"
+              " chain_1_type chain_2_type num_res_chain_1"
+              " num_res_chain_2 lig_het_tag name_chain_1 name_chain_2"
+              " convex_hull_volume as_max_dst"
+              " mean_loc_hyd_dens_norm nas_norm"
+              " surf_pol_vdw14 surf_pol_vdw22 surf_apol_vdw14 surf_apol_vdw22"
+              "\n");
    while (npcur)
    {
       p = npcur->pocket;
@@ -285,6 +288,8 @@ void write_descriptors_DB(c_lst_pockets *pockets, FILE *f)
          fprintf(f, " %d", p->pdesc->aa_compo[i]);
       fprintf(f, " %d %d %d %d %s %s %s", p->pdesc->characterChain1, p->pdesc->characterChain2, p->pdesc->numResChain1, p->pdesc->numResChain2, p->pdesc->ligTag, p->pdesc->nameChain1, p->pdesc->nameChain2);
       fprintf(f, " %.4f %.4f", p->pdesc->convex_hull_volume, p->pdesc->as_max_dst);
+      fprintf(f, " %.4f %.4f", p->pdesc->mean_loc_hyd_dens_norm, p->pdesc->nas_norm);
+      fprintf(f, " %.4f %.4f %.4f %.4f", p->pdesc->surf_pol_vdw14, p->pdesc->surf_pol_vdw22, p->pdesc->surf_apol_vdw14, p->pdesc->surf_apol_vdw22);
       //fprintf(f,"%s %s %s",p->pdesc->nameChain1,p->pdesc->nameChain2);
       fprintf(f, "\n");
       fflush(f);
