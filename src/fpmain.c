@@ -191,7 +191,7 @@ void process_pdb(char *pdbname, s_fparams *params)
                 {
                         if (params->db_run)
                         {
-                                write_descriptors_DB(pockets, stdout);
+                                write_descriptors_DB(pockets, stdout, pdbname);
                                 write_out_fpocket_DB(pockets, pdb, pdbname);
                         }
                         else
